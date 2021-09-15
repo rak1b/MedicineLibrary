@@ -1,13 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicine Library | Home</title>
-</head>
-<body>
-    <h1>working</h1>
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock css %}
+
+{% block body %}
+
+<div class='hero_bg h-50'>
+<div class="row d-flex height justify-content-center align-items-center ">
+        <div class="col-md-8 col-sm-4 col-11">
+            <h1 class='text-white'>Medicine Library</h1>
+            <p class='text-white'>Find all the latest medicine information</p>
+            <div class="search"> <i class="fas fa-search"></i> <input type="text" class="form-control" placeholder="Search for a medicine.."> <button class="btn btn-primary">Search</button> </div>
+        </div>
+    </div>
+</div>
+  <div class="container">
+
+<div class="row pb-5 mb-4">
+    {% for med in medicines  %}
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 mt-5">
+            <!-- Card-->
+            <div class="card rounded shadow-sm border-0 ">
+                <div class="card-body p-4 box_shadow"><img class='med_img' src="{{med.image.url}}" alt="" class="img-fluid d-block mx-auto mb-3">
+                    <h5> <a href="#" class="">{{med.name}}</a></h5>
+                    <p class="small text-muted font-italic">{{med.group}}</p>
+                    <p class="small text-muted font-italic">{{med.power}}</p>
+                    <p class='text-warning'><span>৳</span> {{med.price}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
     
-</body>
-</html>
+{% endblock body %}
