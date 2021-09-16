@@ -1,0 +1,56 @@
+{% extends 'navbar.html' %}
+{% load static %} 
+{% block title %} {{medicine.name}} Info {% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock css %} 
+
+{% block body %}
+
+<div class='container box_shadow mt-5'>
+
+<div class='row p-5'>
+  
+  <div class='col-lg-6 col-sm-6 col-md-6 details1'>
+      <h1 class="text-info"><i class='fas fa-pills'></i> {{medicine.name}}</h1>
+      <h5 class="text-secondary">{{medicine.group}}</h5>
+      <p class="text-secondary">{{medicine.power}}</p>
+      <p class="text-warning">Price : <span>৳</span> {{medicine.price}}</p>    
+    </div>
+
+    <div class='col-lg-6 col-sm-12 col-md-12  '>
+      <img class='details_image' src="{{medicine.image.url}}" alt=""> 
+
+  </div>
+  
+  <div class='col-lg-12'>
+      <div>
+        <h4>Alternate brands : </h4>
+        <p class="text-secondary">{{medicine.alternate_brands}}</p>
+
+      </div>
+
+      <div class='uses_div'>
+        <h4>Uses : </h4>
+        <p class="text-secondary">{{medicine.uses}}</p>
+      </div>
+
+      <div class='doses_div'>
+        <h2>Doses : </h2>
+        <p class="text-secondary">{{medicine.doses}}</p>
+      </div>
+
+      <div class='side_effect_div'>
+        <h2>Side Effects : </h2>
+        <p class="text-secondary">{{medicine.side_effect}}</p>
+      </div>
+
+
+
+  </div>
+</div>
+</div>
+
+
+{% endblock body %}

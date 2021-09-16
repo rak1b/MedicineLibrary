@@ -1,38 +1,86 @@
-{% extends 'navbar.html' %}
-{% load static %}
-
+{% extends 'navbar.html' %} {% load static %} 
+{% block title %}Home{% endblock title %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% endblock css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock css %} {% block body %}
 
-{% block body %}
-
-<div class='hero_bg h-50'>
-<div class="row d-flex height justify-content-center align-items-center ">
-        <div class="col-md-8 col-sm-4 col-11">
-            <h1 class='text-white'>Medicine Library</h1>
-            <p class='text-white'>Find all the latest medicine information</p>
-            <div class="search"> <i class="fas fa-search"></i> <input type="text" class="form-control" placeholder="Search for a medicine.."> <button class="btn btn-primary">Search</button> </div>
-        </div>
+<div class="hero_bg h-50">
+  <div class="row d-flex height justify-content-center align-items-center">
+    <div class="col-md-8 col-sm-4 col-11">
+      <h1 class="text-white">Medicine Library</h1>
+      <p class="text-white">Find all the latest medicine information</p>
+      <div class="search">
+        <i class="fas fa-search"></i>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search for a medicine.."
+        />
+        <button class="btn btn-primary">Search</button>
+      </div>
     </div>
+  </div>
 </div>
-  <div class="container">
-
-<div class="row pb-5 mb-4">
-    {% for med in medicines  %}
-        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 mt-5">
-            <!-- Card-->
-            <div class="card rounded shadow-sm border-0 ">
-                <div class="card-body p-4 box_shadow"><img class='med_img' src="{{med.image.url}}" alt="" class="img-fluid d-block mx-auto mb-3">
-                    <h5> <a href="#" class="">{{med.name}}</a></h5>
-                    <p class="small text-muted font-italic">{{med.group}}</p>
-                    <p class="small text-muted font-italic">{{med.power}}</p>
-                    <p class='text-warning'><span>৳</span> {{med.price}}</p>
-                </div>
-            </div>
+<div class="container">
+<h2 class='mt-5'>Medicines - <span class="badge bg-dark">A-Z</span></h2>
+  <div class="row pb-5 mb-4">
+    {% for med in page_obj %}
+    <div class="col-lg-2 col-md-4 col-sm-6 col-6 mb-4 mb-lg-5 mt-5">
+      <!-- Card-->
+      <div class="my_card card rounded shadow-sm border-0">
+        <div class="card-body p-lg-4 p-sm-1 box_shadow">
+          <img
+            class="med_img"
+            src="{{med.image.url}}"
+            alt=""
+            class="img-fluid d-block mx-auto mb-3"
+          />
+          <h5 class="">{{med.name}}</h5>
+          <p class="small">{{med.power}}</p>
+          <p class="small">{{med.group}}</p>
+          <p class="text-warning"><span>৳</span> {{med.price}}</p>
+          <a class='btn btn-outline-success btn_details mt-2' href="{% url 'detailsView' med.id %}">View Details</a>
         </div>
-        {% endfor %}
+      </div>
     </div>
-    </div>
+    {% endfor %}
+  </div>
+
+
+
+
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    </li>
     
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" href="?page=1">Previous</a>
+    </li>
+    {% endif %}
+
+    <li class="page-item active">
+      <span class="page-link">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        <span class="sr-only">(current)</span>
+      </span>
+      
+
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+
+    </li>
+    {% else %}
+      <li class="page-item">
+
+    <a class="page-link">Next</a>
+      {% endif %}
+    </li>
+
+  </ul>
+</div>
+
 {% endblock body %}

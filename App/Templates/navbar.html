@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% block title %}{% endblock title %}
+    <title>{% block title %}{% endblock title %}</title>
+    
     <link
       rel="stylesheet"
       href="{% static 'assets\bootstrap-5.0.2-dist\css\bootstrap.min.css' %}"
@@ -20,7 +21,7 @@
   <body>
     <nav class="navbar nav_shadow navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand ms-5" href="#">Medicine Library</a>
+        <a class="navbar-brand ms-5" href="#"><img class='logo' src="{% static 'img/logo.png' %}" alt="Medicine Library" srcset=""></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -59,3 +60,5 @@
     {% block body %}{% endblock body %}
   </body>
 </html>
+
+
