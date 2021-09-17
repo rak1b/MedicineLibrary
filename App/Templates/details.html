@@ -1,56 +1,152 @@
-{% extends 'navbar.html' %}
-{% load static %} 
-{% block title %} {{medicine.name}} Info {% endblock title %}
+{% extends 'navbar.html' %} {% load static %} 
 
-{% block css %}
+{% block title %}
+{{medicine.name}} Info 
+{% endblock title %}
+
+ {% block css %}
+<link
+  rel="stylesheet"
+  href="{% static 'assets\splide-2.4.21\dist\css\splide.min.css' %}"
+/>
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
 {% endblock css %} 
 
 {% block body %}
 
-<div class='container box_shadow mt-5'>
+<div class="container mt-5">
 
-<div class='row p-5'>
-  
-  <div class='col-lg-6 col-sm-6 col-md-6 details1'>
-      <h1 class="text-info"><i class='fas fa-pills'></i> {{medicine.name}}</h1>
-      <h5 class="text-secondary">{{medicine.group}}</h5>
-      <p class="text-secondary">{{medicine.power}}</p>
-      <p class="text-warning">Price : <span>৳</span> {{medicine.price}}</p>    
+
+    <div class="row p-5">
+      <div class="col-lg-6 col-sm-6 col-md-6 details1">
+        <h1 class="text-info">
+          <i class="fas fa-pills"></i> {{medicine.name}}
+        </h1>
+        <h5 class="text-secondary">{{medicine.group}}</h5>
+        <p class="text-secondary">{{medicine.power}}</p>
+        <p class="text-warning">Price : <span>৳</span> {{medicine.price}}</p>
+      </div>
+
+      <div class="col-lg-6 col-sm-12 col-md-12">
+        <img class="details_image" src="{{medicine.image.url}}" alt="" />
+      </div>
+
+      <div class="col-lg-12">
+        <div>
+          <h4>Alternate brands :</h4>
+          <p class="text-secondary">{{medicine.alternate_brands}}</p>
+        </div>
+
+        <div class="uses_div">
+          <h4>Uses :</h4>
+          <p class="text-secondary">{{medicine.uses}}</p>
+        </div>
+
+        <div class="doses_div">
+          <h2>Doses :</h2>
+          <p class="text-secondary">{{medicine.doses}}</p>
+        </div>
+
+        <div class="side_effect_div">
+          <h2>Side Effects :</h2>
+          <p class="text-secondary">{{medicine.side_effect}}</p>
+        </div>
+      </div>
     </div>
 
-    <div class='col-lg-6 col-sm-12 col-md-12  '>
-      <img class='details_image' src="{{medicine.image.url}}" alt=""> 
 
+    <div class="item ">
+    <h3 class='text-center my-5'>Related Medicines : </h3>
+
+            <ul id="content-slider" class="content-slider">
+               {% for med in related_medicine %}
+            <li>
+              <div class=" my_card card rounded shadow-sm border-0 ms-sm-4 m-md-3 ms-lg-5">
+                <div class="card-body p-lg-4 p-sm-1 box_shadow">
+                  <img class="med_img" src="{{med.image.url}}"  alt="" class="img-fluid d-block mx-auto mb-3" />
+
+                  <h5 class="">{{med.name}}</h5>
+                  <p class="small">{{med.power}}</p>
+                  <p class="small">{{med.group}}</p>
+                  <p class="text-warning"><span>৳</span> {{med.price}}</p>
+                  <a class='btn btn-outline-success btn_details mt-2' href="{% url 'detailsView' med.id med.name%}">View Details</a>
+                </div>
+            </div>  
+            </li>
+          
+          {% endfor %}
+        
+            </ul>
+        </div>
   </div>
-  
-  <div class='col-lg-12'>
-      <div>
-        <h4>Alternate brands : </h4>
-        <p class="text-secondary">{{medicine.alternate_brands}}</p>
-
-      </div>
-
-      <div class='uses_div'>
-        <h4>Uses : </h4>
-        <p class="text-secondary">{{medicine.uses}}</p>
-      </div>
-
-      <div class='doses_div'>
-        <h2>Doses : </h2>
-        <p class="text-secondary">{{medicine.doses}}</p>
-      </div>
-
-      <div class='side_effect_div'>
-        <h2>Side Effects : </h2>
-        <p class="text-secondary">{{medicine.side_effect}}</p>
-      </div>
 
 
 
-  </div>
-</div>
-</div>
+
+  {% endblock body %}
+  {% block script %}  
+  <script src="{% static 'assets\jquery.min.js' %}"></script>
+    <script src="{% static 'assets\lightslider-master\dist\js\lightslider.js' %}"></script>
+    <script>
 
 
-{% endblock body %}
+      $(document).ready(function () {
+       
+            
+        // alert("Home Connected")
+        $("#content-slider").lightSlider({
+          item: 3,
+          loop: true,
+          keyPress: true,
+          auto: true,
+          loop: true,
+          pauseOnHover: true,
+          slideMove: 2,
+          easing: "cubic-bezier(0.25, 0, 0.25, 1)",
+          speed: 600,
+          responsive: [
+            {
+              breakpoint: 1920,
+              settings: {
+                item: 5,
+                // slideMove: 2,
+                // slideMargin: 6,
+              },
+            },
+            {
+              breakpoint: 1920,
+              settings: {
+                item: 5,
+                // slideMove: 2,
+                // slideMargin: 6,
+              },
+            },
+            {
+              breakpoint: 1000,
+              settings: {
+                item: 3,
+              },
+            },
+            {
+              breakpoint: 780,
+              settings: {
+                item: 2,
+                slideMove: 1,
+              },
+            },
+            {
+              breakpoint: 420,
+              settings: {
+                item: 1,
+                slideMove: 1,
+              },
+            },
+          ],
+        });
+      });
+
+    </script>
+
+  {% endblock script %}
+

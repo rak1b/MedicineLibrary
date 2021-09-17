@@ -1,6 +1,7 @@
 {% extends 'navbar.html' %} {% load static %} 
 {% block title %}Home{% endblock title %}
 {% block css %}
+
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 {% endblock css %} {% block body %}
 
@@ -9,15 +10,22 @@
     <div class="col-md-8 col-sm-4 col-11">
       <h1 class="text-white">Medicine Library</h1>
       <p class="text-white">Find all the latest medicine information</p>
+      
       <div class="search">
+      <form method='get' action='{% url "searchView" %}'>
+
         <i class="fas fa-search"></i>
         <input
+          name='q'
           type="text"
           class="form-control"
           placeholder="Search for a medicine.."
+          value=''
         />
         <button class="btn btn-primary">Search</button>
-      </div>
+      </form>
+        </div>
+
     </div>
   </div>
 </div>
@@ -39,7 +47,7 @@
           <p class="small">{{med.power}}</p>
           <p class="small">{{med.group}}</p>
           <p class="text-warning"><span>৳</span> {{med.price}}</p>
-          <a class='btn btn-outline-success btn_details mt-2' href="{% url 'detailsView' med.id %}">View Details</a>
+          <a class='btn btn-outline-success btn_details mt-2' href="{% url 'detailsView' med.id med.name%}">View Details</a>
         </div>
       </div>
     </div>

@@ -1,0 +1,50 @@
+{% extends 'navbar.html' %} {% load static %} 
+
+{% block title %}
+Search Results 
+{% endblock title %}
+
+ {% block css %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+{% endblock css %} 
+{% block body %}
+<div class="row">
+
+  <div class="col-lg-12 ">
+{% if len > 0 %}
+
+  <h2 class='text-center m-5'>Search Results for '{{query}}': </h2>
+
+  {% for med in search_meds  %}
+      <a href="{% url 'detailsView' med.id med.name%}" class="" style="text-decoration: none;">
+      <div class="card mb-lg-4 shadow w-75 m-auto">
+        <div class="card-body">
+          <h5 class="card-title text-info">
+          <i class="fas fa-pills"></i> {{med.name}} {{med.power}}
+          </h5>
+          <p class="card-text small">{{med.group}}</p>
+          <p class="card-text">{{med.uses|truncatechars:200}}</p>
+          
+        </div>
+      </div>
+      </a>
+  {% endfor %}
+
+  
+  </div>
+
+  {% else %}
+
+  <h2 class='text-center mt-5 text-warning'>Sorry!! No Results Found for '{{query}}': </h2>
+  <p class="text-center">Try again,with another keyword</p>
+
+
+  {% endif %}
+
+</div>
+
+
+{% endblock body %}
+

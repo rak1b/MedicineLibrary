@@ -1,0 +1,160 @@
+{% load static %}
+{% comment %} https://splidejs.com/getting-started/ {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'assets\splide-2.4.21\dist\css\splide.min.css' %}"
+    />
+        
+    <link
+      rel="stylesheet"
+      href="{% static 'assets\bootstrap-5.0.2-dist\css\bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets\fontawesome-free-5.15.4-web\css\all.min.css' %}"
+    />
+    <script src="{% static 'assets\bootstrap-5.0.2-dist\js\bootstrap.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+  
+  </head>
+  <body>
+  <div class="slider">
+    <div class="splide">
+      <div class="splide__track">
+        <ul class="splide__list">
+          <li class="splide__slide">
+          <div class="splide__slide__container">
+            <img src="https://source.unsplash.com/500x500/?nature" alt="">
+				  </div>
+			    	Lorem Ipsum Dolor Sit Amet
+          
+          </li>
+
+          <li class="splide__slide">
+          <div class="splide__slide__container">
+            <img src="https://source.unsplash.com/500x500/?water" alt="">
+				  </div>
+			    	Lorem Ipsum Dolor Sit Amet
+          
+          </li>
+
+          <li class="splide__slide">
+          <div class="splide__slide__container">
+            <img src="https://source.unsplash.com/500x500/?Tech" alt="">
+				  </div>
+			    	Lorem Ipsum Dolor Sit Amet
+          
+          </li>
+
+          <li class="splide__slide">
+          <div class="splide__slide__container">
+            <img src="https://source.unsplash.com/500x500/?Robot" alt="">
+				  </div>
+			    	Lorem Ipsum Dolor Sit Amet
+                  <a class='btn btn-outline-success btn_details mt-2' href="">View Details</a>
+
+          
+          </li>
+
+           <li class="splide__slide">
+          <div class="splide__slide__container">
+            <img src="https://source.unsplash.com/500x500/?Country" alt="">
+				  </div>
+			    	Lorem Ipsum Dolor Sit Amet
+            <a class='btn btn-outline-success btn_details mt-2' href="">View Details</a>
+          
+          </li>
+
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+
+
+    <div class="slider container">
+      <div class="splide3">
+        <div class="splide__track">
+          <ul class="splide__list">
+          {% for med in related_medicine %}
+            <li>
+          <div class="splide__slide__container">
+
+              <div class=" my_card card rounded shadow-sm border-0">
+                <div class="card-body p-lg-4 p-sm-1 box_shadow">
+                  <img class="med_img" src="{{med.image.url}}"  alt="" class="img-fluid d-block mx-auto mb-3" />
+
+                  <h5 class="">{{med.name}}</h5>
+                  <p class="small">{{med.power}}</p>
+                  <p class="small">{{med.group}}</p>
+                  <p class="text-warning"><span>৳</span> {{med.price}}</p>
+                  <a class='btn btn-outline-success btn_details mt-2' href="">View Details</a>
+                </div>
+              </div>  
+            </div>  
+            </li>
+          
+          {% endfor %}
+        
+          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{% static 'assets\splide-2.4.21\dist\js\splide.min.js' %}"></script>
+    <script>
+    $( document ).ready(function() {
+
+      new Splide( '.splide', {
+        type   : 'loop',
+        perPage: 3,
+        perMove: 1,
+        autoplay: true,
+        focus  : 'center',
+        breakpoints: {
+          '640': {
+            perPage: 2,
+            gap    : '1rem',
+          },
+          '480': {
+            perPage: 1,
+            gap    : '1rem',
+          },
+        }
+      } ).mount();
+
+
+      new Splide( '.splide3', {
+        type   : 'loop',
+        perPage: 3,
+        perMove: 1,
+        autoplay: true,
+        focus  : 'center',
+        breakpoints: {
+          '640': {
+            perPage: 2,
+            gap    : '1rem',
+          },
+          '480': {
+            perPage: 1,
+            gap    : '1rem',
+          },
+        }
+      } ).mount();
+
+          console.log( "ready!" );
+    });
+    </script>
+  </body>
+</html>

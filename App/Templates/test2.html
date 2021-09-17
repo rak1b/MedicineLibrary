@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="{% static 'assets\bootstrap-5.0.2-dist\css\bootstrap.min.css' %}"
+    />
+    <link type="text/css" rel="stylesheet" href="{% static 'assets\lightslider-master\dist\css\lightslider.css' %}" />                  
+    
+    <script src="{% static 'assets\bootstrap-5.0.2-dist\js\bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+  
+  </head>
+  <body>
+
+      <h1>HomePage</h1>
+
+<form action="{% url 'searchView' %}" method="get">
+  <input name="search" type="text" placeholder="Search...">
+  {% comment %} <input type="submit" value='submit'>  {% endcomment %}
+  <button>submit</button>
+</form>
+
+        <div class="item">
+            <ul id="content-slider" class="content-slider">
+               {% for med in medicine %}
+            <li>
+              <div class=" my_card card rounded shadow-sm border-0">
+                <div class="card-body p-lg-4 p-sm-1 box_shadow">
+                  <img class="med_img" src="{{med.image.url}}"  alt="" class="img-fluid d-block mx-auto mb-3" />
+
+                  <h5 class="">{{med.name}}</h5>
+                  <p class="small">{{med.power}}</p>
+                  <p class="small">{{med.group}}</p>
+                  <p class="text-warning"><span>৳</span> {{med.price}}</p>
+                  <a class='btn btn-outline-success btn_details mt-2' href="">View Details</a>
+                </div>
+            </div>  
+            </li>
+          
+          {% endfor %}
+        
+            </ul>
+        </div>
+
+
+    <script src="{% static 'assets\jquery.min.js' %}"></script>
+    <script src="{% static 'assets\lightslider-master\dist\js\lightslider.js' %}"></script>
+    <script>
+    	 $(document).ready(function() {
+			$("#content-slider").lightSlider({
+                loop:true,
+                keyPress:true,
+                item: 5,
+                autoWidth: true,
+                controls: true,
+            });
+          
+		});
+    </script>
+</head>
+    
+  </body>
+</html>
