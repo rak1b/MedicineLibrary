@@ -73,6 +73,28 @@
   background: rgb(95, 95, 255);
 }
 
+.nav_search .search input {
+	height: 48px;
+	text-indent: 25px;
+	border: 2px solid #d6d4d4;
+	width: 320px;
+}
+
+.nav_search  .search .fa-search {
+	position: absolute;
+	top: 16px;
+	left: 16px;
+}
+
+.nav_search .search button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	height: 37px;
+	width: 70px;
+	background: rgb(95, 95, 255);
+}
+
 .med_img{
     height: 150px;
     width: 100%;
@@ -153,4 +175,54 @@
 	font-size: 49px;
 	background: #55c7ff;
 	color: white;
+}
+
+
+
+
+
+@media screen and (max-width: 480px) {
+  .logo {
+    width: 100px !important;
+    height: 80px !important;
+  }
+  .nav_search .search button {
+    right: 200px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .logo {
+    width: 120px !important;
+    height: 90px !important;
+  }
+  .nav_search .search button {
+    left: 245px;
+  }
+
+  #navbarNav ul {
+    background: white;
+    width: 100vw !important;
+    height: 100vh;
+  }
+
+  #navbarNav ul li {
+    margin-left: 30px;
+  }
+}
+
+.ans_row .col-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    background: #306b9e;
+    border-radius: 50%;
+}
+
+.ans_row .col-1 i{
+    font-size: 30px;
+    border-radius: 50%;
+    color: #ffff;
 }

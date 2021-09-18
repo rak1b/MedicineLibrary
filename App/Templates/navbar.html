@@ -36,26 +36,52 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto me-5">
+            <li class="nav-item nav_search">
+              <div class="search">
+              <form method='get' action='{% url "searchView" %}'>
+
+                <i class="fas fa-search"></i>
+                <input
+                  name='q'
+                  type="text"
+                  class="form-control"
+                  placeholder="Search for a medicine.."
+                  value=''
+                />
+                <button class="btn btn-primary">Search</button>
+              </form>
+            </li>
+
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'homeView' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link" href="{% url 'forumView' %}">Forum</a>
+            </li>
+            
+            {% if request.user.is_authenticated  %}
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logoutView' %}">Logout</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
+            <a class="nav-link position-relative btn btn-outline-success disabled text-capitalize" href="{% url 'logoutView' %}">{{request.user}}
+              <span class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            </a>
             </li>
-            {% if request.user.is_authenticated %}
+
+            {% else %}
             <li class="nav-item">
-              <a
-                class="nav-link disabled"
-                href="#"
-                tabindex="-1"
-                aria-disabled="true"
-                >{{request.user}}</a
-              >
+              <a class="nav-link" href="{% url 'signupView' %}">Sign Up</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'loginView' %}">Login</a>
             </li>
             {% endif %}
           </ul>

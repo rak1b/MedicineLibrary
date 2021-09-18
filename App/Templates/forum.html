@@ -1,0 +1,89 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Forum{% endblock title %}
+
+{% block css %}
+<style>
+.nav_search{
+  display: none;
+}
+</style>
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock css %}
+
+{% block body %}
+<div class="container">
+    <h2 class='text-secondary p-3 text-info text-center my-5'> <i class='fas fa-smile '></i> Medicine Library Forum</h2>
+
+    <div class='forum_nav d-flex justify-content-center'>
+      <a class='text-decoration-none btn btn-primary mx-3' href="">See all <span class="badge text-primary bg-white">9</span>
+          <span class="sr-only">unread messages</span>
+      </a>
+      <a class='text-decoration-none btn btn-primary mx-3 ' href="">See yours <span class="badge text-primary bg-white">9</span>
+          <span class="sr-only">unread messages</span></a>
+      <a class='text-decoration-none btn btn-primary mx-3 ' href="{% url 'askView' %}">Ask a question</a>
+    
+    </div>
+
+  <div class="row pb-5 mb-4">
+<h2 class='mt-5 text-center'>Question people Asked - <span class="badge bg-dark">Newest</span></h2>
+
+    {% for ques in page_obj %}
+    <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-10 offset-sm-1 my-2">
+      <!-- Card-->
+      <a class='text-decoration-none' href="{% url 'ques_detailsView' ques.id %}">
+      <div class="card rounded shadow-sm border-0">
+        <div class="card-body p-lg-4 p-sm-1 box_shadow">
+          <h5 class="">{{ques.question}}</h5>
+          <p>Asked by - {{ques.user}}</p>
+          <p class='small'>{{ques.date_added}}</p>
+        </div>
+      </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+<div class='w-75  m-auto '>
+  <ul class="pagination ms-lg-5">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    </li>
+    
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" href="?page=1">Previous</a>
+    </li>
+    {% endif %}
+
+    <li class="page-item active">
+      <span class="page-link">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        <span class="sr-only">(current)</span>
+      </span>
+      
+
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+
+    </li>
+    {% else %}
+      <li class="page-item">
+
+    <a class="page-link">Next</a>
+      {% endif %}
+    </li>
+
+  </ul>
+</div>
+
+
+</div>
+</div>
+
+{% endblock %}

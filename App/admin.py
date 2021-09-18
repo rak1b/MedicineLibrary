@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Medicine,Medicine_Group
+from .models import Medicine,Medicine_Group,Question,Answer
 
 # Register your models here.
 
@@ -11,7 +11,14 @@ class medicineAdmin(admin.ModelAdmin):
 @admin.register(Medicine_Group)
 class groupAdmin(admin.ModelAdmin):
     list_display = ['name']
+
+@admin.register(Question)
+class groupAdmin(admin.ModelAdmin):
+    list_display = ['question','user']
     
+@admin.register(Answer)
+class groupAdmin(admin.ModelAdmin):
+    list_display = ['question','answer','user']
 
 # @admin.register(User)
 # class UserAdmin(admin.ModelAdmin):

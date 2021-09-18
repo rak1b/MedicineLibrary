@@ -19,7 +19,7 @@ Search Results
 
   {% for med in search_meds  %}
       <a href="{% url 'detailsView' med.id med.name%}" class="" style="text-decoration: none;">
-      <div class="card mb-lg-4 shadow w-75 m-auto">
+      <div class="card mb-4  shadow w-75 m-auto">
         <div class="card-body">
           <h5 class="card-title text-info">
           <i class="fas fa-pills"></i> {{med.name}} {{med.power}}
