@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import homeView,detailsView,testView,searchView,signupView,loginView,logoutView,forumView,askView,ques_detailsView
+from .views import homeView,detailsView,searchView,signupView,loginView,logoutView,forumView,askView,ques_detailsView
 urlpatterns = [
     path('',homeView,name='homeView'),
     path('details/<uuid:id>/<str:name>',detailsView,name='detailsView'),
@@ -14,7 +14,6 @@ urlpatterns = [
     path('forum',forumView,name='forumView'),
     path('ask',askView,name='askView'),
     path('quesdetails/<int:id>',ques_detailsView,name='ques_detailsView'),
-    path('test',testView,name='testView'),
     
 ]
 

@@ -20,7 +20,6 @@ def homeView(request):
     return render(request, 'index.html', context)
 
 def detailsView(request,id,name):
-    print(request)
     medicine = get_object_or_404(Medicine, pk=id)
     
     related_medicine = Medicine.objects.filter(group__name = medicine.group.name)
@@ -32,13 +31,7 @@ def detailsView(request,id,name):
 
     return render(request,'details.html',context)
 
-def testView(request):
-    medicines = Medicine.objects.all().order_by('name')
 
-    context = {
-        'medicine':medicines,
-        }
-    return render(request,'test2.html',context)
 
 def searchView(request):
     query = request.GET.get('q')
@@ -86,15 +79,19 @@ def logoutView(request):
 
 def forumView(request):
     which_ques = request.GET.get('questions')
+    if request.user.is_authenticated:
+        my_questions = Question.objects.filter(user=request.user).order_by('-date_added')
+    else:
+        my_questions = Question.objects.filter(question='this wil return 0')
+        
+        
     questions = Question.objects.all().order_by('-date_added')
-    my_questions = Question.objects.filter(user=request.user).order_by('-date_added')
-    print(questions)
     if which_ques=='my':
         paginator = Paginator(my_questions,6)
-        title = 'Question You Have Asked'
+        title = 'Questions You Have Asked'
     else:
         paginator = Paginator(questions,6)
-        title = 'Question People Asked'
+        title = 'Questions People Asked'
         
         
         
