@@ -140,3 +140,6 @@ MESSAGE_TAGS = {
         messages.WARNING: 'warning',
         messages.ERROR: 'danger',
  }
+
+USE_TZ = True
+TIME_ZONE = 'Asia/Dhaka'

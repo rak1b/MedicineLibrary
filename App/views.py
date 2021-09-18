@@ -7,6 +7,7 @@ from django.contrib.auth import login, authenticate,logout
 
 from .forms import SignUpForm
 from django.contrib import messages
+from django.utils import timezone
 
 
 def homeView(request):
@@ -103,6 +104,8 @@ def forumView(request):
         'total_my_ques':len(my_questions),
         'title':title
     }
+    
+    
     return render(request,'forum.html',context)
 
 def ques_detailsView(request,id):
