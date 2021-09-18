@@ -85,14 +85,26 @@ def logoutView(request):
     return redirect('homeView')
 
 def forumView(request):
+    which_ques = request.GET.get('questions')
     questions = Question.objects.all().order_by('-date_added')
+    my_questions = Question.objects.filter(user=request.user).order_by('-date_added')
     print(questions)
-    paginator = Paginator(questions,10)
+    if which_ques=='my':
+        paginator = Paginator(my_questions,6)
+        title = 'Question You Have Asked'
+    else:
+        paginator = Paginator(questions,6)
+        title = 'Question People Asked'
+        
+        
+        
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
         'page_obj': page_obj,
-        'total_num':len(questions)
+        'total_ques':len(questions),
+        'total_my_ques':len(my_questions),
+        'title':title
     }
     return render(request,'forum.html',context)
 

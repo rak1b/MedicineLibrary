@@ -17,17 +17,23 @@
     <h2 class='text-secondary p-3 text-info text-center my-5'> <i class='fas fa-smile '></i> Medicine Library Forum</h2>
 
     <div class='forum_nav d-flex justify-content-center'>
-      <a class='text-decoration-none btn btn-primary mx-3' href="">See all <span class="badge text-primary bg-white">9</span>
+    <form action="{{forumView}}">
+      <input name='questions' type="hidden" value = 'all'>
+      <button type='submit' class='text-decoration-none btn btn-primary mx-3'>See all <span class="badge text-primary bg-white">{{total_ques}}</span>
           <span class="sr-only">unread messages</span>
-      </a>
-      <a class='text-decoration-none btn btn-primary mx-3 ' href="">See yours <span class="badge text-primary bg-white">9</span>
-          <span class="sr-only">unread messages</span></a>
+      </button>
+     </form>
+     <form action="{{forumView}}">
+      <input name='questions' type="hidden" value = 'my'>
+      <button class='text-decoration-none btn btn-primary mx-3 ' >See yours <span class="badge text-primary bg-white">{{total_my_ques}}</span>
+          <span class="sr-only">unread messages</span></button>
+       </form>
       <a class='text-decoration-none btn btn-primary mx-3 ' href="{% url 'askView' %}">Ask a question</a>
     
     </div>
 
   <div class="row pb-5 mb-4">
-<h2 class='mt-5 text-center'>Question people Asked - <span class="badge bg-dark">Newest</span></h2>
+<h2 class='mt-5 text-center'>{{title}} - <span class="badge bg-dark">Newest</span></h2>
 
     {% for ques in page_obj %}
     <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-10 offset-sm-1 my-2">
